@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
    helper_method :current_user
 
    def current_user
-     @current_user ||= User.find(session[:user_id])
+     if session[:user_id] != nil
+       @current_user ||= User.find(session[:user_id])
+     else
+       false
+     end
    end
 
    def authorize
@@ -12,5 +16,4 @@ class ApplicationController < ActionController::Base
       redirect_to '/'
     end
   end
-  
  end
